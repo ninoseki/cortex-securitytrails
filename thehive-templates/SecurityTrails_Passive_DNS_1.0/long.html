@@ -24,8 +24,18 @@
           </tr>
           <tr ng-repeat="r in content.records | limitTo:results_limit | orderBy:'-task.time'">
             <td>{{r.hostname}}</td>
-            <td>{{r.whois.expiresDate || "-"}}</td>
-            <td>{{r.whois.createdDate || "-"}}</td>
+            <td>
+              <span ng-if="r.whois.expiresDate">
+                {{r.whois.expiresDate | date:'yyyy-MM-dd'}}
+              </span>
+              <span ng-if="!r.whois.expiresDate">-</span>
+            </td>
+            <td>
+              <span ng-if="r.whois.expiresDate">
+                {{r.whois.createdDate | date:'yyyy-MM-dd'}}
+              </span>
+              <span ng-if="!r.whois.expiresDate">-</span>
+            </td>
             <td>{{r.whois.registrar || "-"}}</td>
             <td>
               <span ng-repeat="host_provider in r.host_provider"> <span class="label label-info">{{host_provider}}</span></span>
